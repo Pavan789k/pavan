@@ -1,0 +1,318 @@
+{
+  "intents": [
+    {
+      "intent": "Shop_name",
+      "examples": [
+        {
+          "text": "Shop name"
+        },
+        {
+          "text": "Enter shop name"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "thankyou",
+      "examples": []
+    },
+    {
+      "intent": "Anything_else",
+      "examples": [
+        {
+          "text": "No"
+        },
+        {
+          "text": "Yes"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "Token",
+      "examples": [
+        {
+          "text": "Medicine"
+        },
+        {
+          "text": "Give me a token"
+        },
+        {
+          "text": "Token number"
+        },
+        {
+          "text": "Generate a token number"
+        },
+        {
+          "text": "General store"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "Thank_you",
+      "examples": [
+        {
+          "text": "Thank you"
+        }
+      ],
+      "description": ""
+    }
+  ],
+  "entities": [
+    {
+      "entity": "Token",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "Token no",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "Your token is",
+          "synonyms": []
+        }
+      ],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "Shop_name",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "Sai, Kiran,raj",
+          "synonyms": []
+        }
+      ],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "Anything_else",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "Yes,no",
+          "synonyms": []
+        }
+      ],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "sys-number",
+      "values": [],
+      "fuzzy_match": true
+    }
+  ],
+  "metadata": {
+    "api_version": {
+      "major_version": "v2",
+      "minor_version": "2018-11-08"
+    }
+  },
+  "webhooks": [
+    {
+      "url": "https://eu-gb.assistant.watson.cloud.ibm.com/eu-gb/crn:v1:bluemix:public:conversation:eu-gb:a~2Faf9937712e874861baa5bbb2616a6bcd:9d76aee5-1f3a-487b-aac8-407cbdba7d49::/skills/59f54f2a-3866-4073-8cf1-290e7c8d1c72/build/options#webhooks",
+      "name": "main_webhook",
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Basic a2FuZHVrdXJpcGF2YW43ODlAZ21haWwuY29tOjk4NDgxNDY0MDQ="
+        }
+      ]
+    }
+  ],
+  "dialog_nodes": [
+    {
+      "type": "standard",
+      "title": "Token",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Token no is 12"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "next_step": {
+        "behavior": "jump_to",
+        "selector": "body",
+        "dialog_node": "Anything else"
+      },
+      "conditions": "#Token",
+      "dialog_node": "node_1_1590563932262",
+      "previous_sibling": "node_4_1590584855591"
+    },
+    {
+      "type": "standard",
+      "title": "Anything else",
+      "output": {
+        "generic": [
+          {
+            "title": "Anything else",
+            "options": [
+              {
+                "label": "Yes",
+                "value": {
+                  "input": {
+                    "text": "What is the issu"
+                  }
+                }
+              },
+              {
+                "label": "No",
+                "value": {
+                  "input": {
+                    "text": "Okey fine"
+                  }
+                }
+              }
+            ],
+            "response_type": "option"
+          }
+        ]
+      },
+      "next_step": {
+        "behavior": "jump_to",
+        "selector": "user_input",
+        "dialog_node": "node_4_1590584855591"
+      },
+      "conditions": "#Anything_else",
+      "dialog_node": "Anything else",
+      "previous_sibling": "node_7_1590563036409",
+      "disambiguation_opt_out": true
+    },
+    {
+      "type": "standard",
+      "title": "Shop names",
+      "output": {
+        "generic": [
+          {
+            "title": "Shops",
+            "options": [
+              {
+                "label": "Sai",
+                "value": {
+                  "input": {
+                    "text": "General store"
+                  }
+                }
+              },
+              {
+                "label": "Kiran",
+                "value": {
+                  "input": {
+                    "text": "Medicine"
+                  }
+                }
+              },
+              {
+                "label": "Raj",
+                "value": {
+                  "input": {
+                    "text": "General store"
+                  }
+                }
+              },
+              {
+                "label": "Ramu",
+                "value": {
+                  "input": {
+                    "text": "Whole sale"
+                  }
+                }
+              },
+              {
+                "label": "Kumar",
+                "value": {
+                  "input": {
+                    "text": "General store"
+                  }
+                }
+              }
+            ],
+            "description": "Select shop",
+            "response_type": "option"
+          }
+        ]
+      },
+      "next_step": {
+        "behavior": "jump_to",
+        "selector": "user_input",
+        "dialog_node": "node_1_1590563932262"
+      },
+      "conditions": "#Shop_name",
+      "dialog_node": "node_7_1590563036409",
+      "previous_sibling": "node_1_1590563932262"
+    },
+    {
+      "type": "standard",
+      "title": "Thank you",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Thank you"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "#Thank_you",
+      "dialog_node": "node_4_1590584855591",
+      "previous_sibling": "Welcome"
+    },
+    {
+      "type": "standard",
+      "title": "Welcome",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Hello. How can I help you?"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "welcome",
+      "dialog_node": "Welcome"
+    }
+  ],
+  "counterexamples": [],
+  "system_settings": {
+    "off_topic": {
+      "enabled": true
+    },
+    "disambiguation": {
+      "prompt": "Did you mean:",
+      "enabled": true,
+      "randomize": true,
+      "max_suggestions": 5,
+      "suggestion_text_policy": "title",
+      "none_of_the_above_prompt": "None of the above"
+    },
+    "system_entities": {
+      "enabled": true
+    },
+    "human_agent_assist": {
+      "prompt": "Did you mean:"
+    },
+    "spelling_auto_correct": true
+  },
+  "learning_opt_out": false,
+  "name": "My first skill",
+  "language": "en",
+  "description": ""
+}
